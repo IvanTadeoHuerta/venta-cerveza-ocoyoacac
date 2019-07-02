@@ -2295,9 +2295,26 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 @media (max-width: 768px) {
   .banner-area {
-    background: url(../img/header-bg.png);
+   
     background-position: 50% 90% 50% 50%;
+    height: 570px;
+    animation-name: slidein;
+    -webkit-animation: banner-area 8s infinite; /* Safari 4.0 - 8.0 */
+    animation: banner-area 8s infinite;
   }
+
+  @keyframes banner-area {
+  0% {
+     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
+  }
+  50% {
+     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
+  }
+
+  100% {
+    background: url(../img/header-bg-movil-corona.jpg) no-repeat;
+ }
+
 }
 
 .banner-content {
