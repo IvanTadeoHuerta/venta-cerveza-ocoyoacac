@@ -2283,7 +2283,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(../img/header-bg.jpg) center;
+  background: url(../img/header-bg.png) center;
   background-size: cover;
 }
 
@@ -2295,7 +2295,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 @media (max-width: 768px) {
   .banner-area {
-    background: url(../img/header-bg.jpg);
+    background: url(../img/header-bg.png);
     background-position: 50% 90% 50% 50%;
   }
 }
