@@ -2295,24 +2295,23 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 @media (max-width: 768px) {
   .banner-area {
-   
+    background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
     background-position: 50% 90% 50% 50%;
     height: 570px;
     animation-name: slidein;
-    -webkit-animation: banner-area 8s infinite; /* Safari 4.0 - 8.0 */
-    animation: banner-area 8s infinite;
+    -webkit-animation: banner-area 30s infinite; /* Safari 4.0 - 8.0 */
+    animation: banner-area 30s infinite;
+    animation-delay: 2s;
+    -webkit-animation-delay: 2s;
   }
 
   @keyframes banner-area {
-  0% {
-     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
-  }
-  50% {
-     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
-  }
 
-  100% {
-    background: url(../img/header-bg-movil-corona.jpg) no-repeat;
+  35%{
+     background: url(../img/header-bg-movil-corona.jpg) no-repeat;
+  }
+  70% {
+    background: url(../img/header-bg-movil-vic.jpg) no-repeat;
  }
 
 }
