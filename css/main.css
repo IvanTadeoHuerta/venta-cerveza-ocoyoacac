@@ -2299,8 +2299,8 @@ body.mobile-nav-active #mobile-nav-toggle {
     background-position: 50% 90% 50% 50%;
     height: 570px;
     animation-name: slidein;
-    -webkit-animation: banner-area 30s infinite; /* Safari 4.0 - 8.0 */
-    animation: banner-area 30s infinite;
+    -webkit-animation: banner-area 21s infinite; /* Safari 4.0 - 8.0 */
+    animation: banner-area 21s infinite;
     animation-delay: 2s;
     -webkit-animation-delay: 2s;
     animation-timing-function: linear;
@@ -2364,12 +2364,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .primary-btn {
-  background: #fff;
+  background: rgba(0, 0, 0, 0.075);
   border: 1px solid transparent;
-  color: #222;
+  color: white;
   padding-left: 40px;
   padding-right: 40px;
   border-radius: 50px;
+  border-color: white;
 }
 
 .primary-btn:hover {
@@ -2411,21 +2412,6 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 
-.video-right {
-  background: url(../img/video-bg.jpg) no-repeat center;
-  background-size: cover;
-  height: 350px;
-  border-radius: 10px;
-}
-
-.video-right .overlay-bg {
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.78);
-}
-
-.video-right .play-btn {
-  z-index: 2;
-}
 
 @media (max-width: 800px) {
   .video-right {
