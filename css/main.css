@@ -2303,6 +2303,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     animation: banner-area 30s infinite;
     animation-delay: 2s;
     -webkit-animation-delay: 2s;
+    animation-timing-function: linear;
   }
 
   @keyframes banner-area {
