@@ -2298,6 +2298,11 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-bottom: 50px;
   }
 
+  .mapa-ubicacion{
+    width: 100%;
+    height: 400px;
+  }
+
   .banner-area {
     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
     background-position: 50% 90% 50% 50%;
@@ -2534,7 +2539,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .footer-area {
   color: #fff;
   padding-top: 220px;
-  background: url(../img/footer-bg.jpg) center;
+  background: url(../img/footer-bg.png) center;
   background-size: cover;
 }
 

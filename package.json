@@ -1,0 +1,26 @@
+{
+  "name": "venta-cerveza",
+  "version": "1.0.0",
+  "description": "Pagina PWA para desposito",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanTadeoHuerta/venta-cerveza-ocoyoacac.git"
+  },
+  "keywords": [
+    "PAGINA",
+    "ESTATICA"
+  ],
+  "author": "IVAN TADEO HUERTA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanTadeoHuerta/venta-cerveza-ocoyoacac/issues"
+  },
+  "homepage": "https://github.com/IvanTadeoHuerta/venta-cerveza-ocoyoacac#readme",
+  "dependencies": {
+    "http-server": "^0.10.0"
+  }
+}
