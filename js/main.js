@@ -270,7 +270,10 @@ $(document).ready(function(){
 
 
 
-
+        $('.btn-ordena-ahora').on('click', function(){
+           $('.link-ordenar').trigger( "click" );
+           console.log('disparo')
+        });
 
 
 

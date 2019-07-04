@@ -2303,6 +2303,10 @@ body.mobile-nav-active #mobile-nav-toggle {
     height: 400px;
   }
 
+  .link-whatsapp-number{
+    padding-bottom: 30px;
+  }
+
   .banner-area {
     background: url(../img/header-bg-movil-tecate.jpg) no-repeat;
     background-position: 50% 90% 50% 50%;
