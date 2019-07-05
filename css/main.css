@@ -2283,7 +2283,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 .banner-area {
-  background: url(../img/header-bg.png) center;
+  background: url(../img/header-bg1.png) center;
   background-size: cover;
 }
 
@@ -2295,6 +2295,20 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 @media( min-width: 800px){
+  .tittle-content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .texto-content, .btn-ordena-ahora:hover{
+    text-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red;
+    color: white;
+  }
+
+  .btn-ordena-ahora:hover{
+    box-shadow: 1px 1px 2px black, 0 0 1em red, 0 0 0.2em red;
+  }
+
   .section-gap-ordenar{
     padding-top: 120px;
   }
