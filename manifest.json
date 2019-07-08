@@ -1,5 +1,35 @@
 {
     "short_name": "Servi-chela",
     "name": "Entrega de cerveza a domicilio",
-    "start_url": "index.html"
+    "start_url": "index.html",
+    "background_color": "#e7dbb0",
+    "theme_color": "#e7dbb0",
+    "display": "fullscreen",
+    "icons": [
+        {
+          "src": "img/icons/icon48x48.png",
+          "type": "image/png",
+          "sizes": "48x48"
+        },
+        {
+          "src": "img/icons/icon72x72.png",
+          "type": "image/png",
+          "sizes": "72x72"
+        },
+        {
+          "src": "img/icons/icon96x96.png",
+          "type": "image/png",
+          "sizes": "96x96"
+        },
+        {
+          "src": "img/icons/icon144x144.png",
+          "type": "image/png",
+          "sizes": "144x144"
+        },
+        {
+          "src": "img/icons/icon192x192.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ]
 }
