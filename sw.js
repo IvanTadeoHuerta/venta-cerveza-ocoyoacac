@@ -100,21 +100,51 @@ self.addEventListener('fetch', event => {
 
 });
 
-self.addEventListener('push', e => {
+self.addEventListener('push', event => {
 
-    const notificacion = JSON.parse( e.data.text() );
+    const notificacion = JSON.parse( event.data.text() );
     const title = notificacion.data.titulo;
     const options = {
         body: notificacion.cuerpo,
         icon: `img/icons/icon72x72.png`,
         image: 'https://cheletoncoacalco.files.wordpress.com/2017/03/cheleton-tecate-original.jpg?w=256&h=256',
         vibrate: [125,75,125,275,200,275,125,75,125,275,200,600,200,600],
-        openUrl: '/',
+        openUrl: '/index.html',
         data: {
-            url: '/'
+            url: '/index.html'
         }
     };
 
-    e.waitUntil( self.registration.showNotification( title, options) );
+    event.waitUntil( self.registration.showNotification( title, options) );
 
+});
+
+self.addEventListener('notificationclick', event => {
+
+    const notificacion = event.notification;
+    
+
+    //Clients son los tabs abiertos en el navegador
+    const respuesta = clients.matchAll()
+    .then( clientes => {
+
+        //Filtrar para los que solo se encuentran visibles
+        let cliente = clientes.find( c => {
+            return c.visibilityState === 'visible';
+        });
+
+        //Si encontro al menos uno, redirecciona
+        if ( cliente !== undefined ) {
+            cliente.navigate( notificacion.data.url );
+            cliente.focus();
+        } else {
+            //No encontro nada, abre nueva ventana con la url
+            clients.openWindow( notificacion.data.url );
+        }
+
+        return notificacion.close();
+
+    });
+
+    event.waitUntil( respuesta );
 });
