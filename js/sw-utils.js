@@ -7,7 +7,7 @@ function actualizaCacheDinamico(dynamicCache, req, res){
 
         //ABRE LA CACHE Y SE AGREGA A LA CACHE DINAMICA
         return caches.open( dynamicCache ).then( cache =>{
-
+            console.log('req', req)
             cache.put( req, res.clone() );
             limpiarCache( dynamicCache, 9);
 
