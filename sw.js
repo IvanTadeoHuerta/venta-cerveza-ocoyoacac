@@ -1,12 +1,12 @@
 
-importScripts( 'js/sw-utils.js' );
+importScripts('js/sw-utils.js');
 
 const NAME_STATIC_CACHE = 'static-v1';
 const NAME_DINAMYC_CACHE = 'dinamyc-v1';
 const NAME_INMUTABLE_CACHE = 'inmutable-v1';
 
 
-const APP_SHELL = [ 
+const APP_SHELL = [
     'index.html',
     'css/main.css',
     'img/fav.png',
@@ -37,28 +37,28 @@ const APP_SHELL_INMUTABLE = [
     'https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700'
 ]
 
-self.addEventListener('install', event =>{
+self.addEventListener('install', event => {
 
-    const saveCacheStatic = caches.open(NAME_STATIC_CACHE).then( cache =>{
-        cache.addAll( APP_SHELL );
+    const saveCacheStatic = caches.open(NAME_STATIC_CACHE).then(cache => {
+        cache.addAll(APP_SHELL);
     });
 
-    const saveCacheInmutable= caches.open(NAME_INMUTABLE_CACHE).then( cache =>{
-        cache.addAll( APP_SHELL_INMUTABLE);
+    const saveCacheInmutable = caches.open(NAME_INMUTABLE_CACHE).then(cache => {
+        cache.addAll(APP_SHELL_INMUTABLE);
     });
 
-    event.waitUntil( Promise.all([ saveCacheStatic, saveCacheInmutable]) );
-    
+    event.waitUntil(Promise.all([saveCacheStatic, saveCacheInmutable]));
 
-}); 
+
+});
 
 //Proceso para borrar cache cuando se hacen cambios en el SW
-self.addEventListener('activate', event =>{
+self.addEventListener('activate', event => {
     console.log('sw activado')
     const respuesta = caches.keys().then(keys => {
 
         keys.forEach(key => {
-            
+
             if (key !== NAME_STATIC_CACHE && key.includes('static')) {
                 // console.log(key,NAME_STATIC_CACHE )
                 return caches.delete(key);
@@ -69,33 +69,33 @@ self.addEventListener('activate', event =>{
 
     event.waitUntil(respuesta);
 
-    self.sk
+    
 
 });
 
 //CACHE CON NETWORK FALLBACK, PRIMERO CONSULTA CACHE SI NO ENCUENTRA EN LA CACHE VE A LA WEB
 // EL CACHE DINAMICO SE CREA CUANDO NO SE ENCUENTRA UN ARCHIVO EN EL CACHE
-self.addEventListener( 'fetch' , event =>{ 
+self.addEventListener('fetch', event => {
 
     //CONSULTA EL CACHE 
     const respuesta = caches.match(event.request).then(resp => {
-        
+
         //SI EXISTE REQUEST EN CACHE , REGRESA EL ARCHIVO
         if (resp) {
 
             return resp;
 
         } else {
-           
+
             //SI NO EXISTE VA A INTERNET
-           return fetch( event.request ).then( newResponse =>{
+            return fetch(event.request).then(newResponse => {
 
-                return actualizaCacheDinamico( NAME_DINAMYC_CACHE, event.request, newResponse );
+                return actualizaCacheDinamico(NAME_DINAMYC_CACHE, event.request, newResponse);
 
-           });
+            });
         }
     });
 
-    event.respondWith( respuesta );
+    event.respondWith(respuesta);
 
 });
