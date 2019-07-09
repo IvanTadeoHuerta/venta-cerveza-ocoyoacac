@@ -99,3 +99,22 @@ self.addEventListener('fetch', event => {
     event.respondWith(respuesta);
 
 });
+
+self.addEventListener('push', e => {
+
+    const notificacion = JSON.parse( e.data.text() );
+    const title = notificacion.data.titulo;
+    const options = {
+        body: notificacion.cuerpo,
+        icon: `img/icons/icon72x72.png`,
+        image: 'https://cheletoncoacalco.files.wordpress.com/2017/03/cheleton-tecate-original.jpg?w=256&h=256',
+        vibrate: [125,75,125,275,200,275,125,75,125,275,200,600,200,600],
+        openUrl: '/',
+        data: {
+            url: '/'
+        }
+    };
+
+    e.waitUntil( self.registration.showNotification( title, options) );
+
+});
