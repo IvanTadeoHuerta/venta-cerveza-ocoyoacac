@@ -10,13 +10,14 @@ if (navigator.serviceWorker) {
 
   }
 
-  window.addEventListener('load', () => {
+  // window.addEventListener('load', () => {
 
     navigator.serviceWorker.register(swLocation).then(registration => {
+      console.log('registrado')
       messaging.useServiceWorker(registration);
     });
 
-  });
+  // });
 
 }
 

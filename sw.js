@@ -69,7 +69,7 @@ self.addEventListener('activate', event => {
 
     event.waitUntil(respuesta);
 
-    
+
 
 });
 
@@ -80,19 +80,26 @@ self.addEventListener('fetch', event => {
     //CONSULTA EL CACHE 
     const respuesta = caches.match(event.request).then(resp => {
 
-        //SI EXISTE REQUEST EN CACHE , REGRESA EL ARCHIVO
-        if (resp) {
+        //VALIDAR QUE NO SEA POST, PORQUE LA CACHE NO PUEDE
+        if ( manejoApiMensajes(event.request) ) {
 
-            return resp;
+           return  fetch(event.request)
 
         } else {
+            //SI EXISTE REQUEST EN CACHE , REGRESA EL ARCHIVO
+            if (resp) {
 
-            //SI NO EXISTE VA A INTERNET
-            return fetch(event.request).then(newResponse => {
+                return resp;
 
-                return actualizaCacheDinamico(NAME_DINAMYC_CACHE, event.request, newResponse);
+            } else {
 
-            });
+                //SI NO EXISTE VA A INTERNET
+                return fetch(event.request).then(newResponse => {
+
+                    return actualizaCacheDinamico(NAME_DINAMYC_CACHE, event.request, newResponse);
+
+                });
+            }
         }
     });
 
@@ -102,49 +109,49 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('push', event => {
 
-    const notificacion = JSON.parse( event.data.text() );
+    const notificacion = JSON.parse(event.data.text());
     const title = notificacion.data.titulo;
     const options = {
         body: notificacion.cuerpo,
         icon: `img/icons/icon72x72.png`,
         image: 'https://cheletoncoacalco.files.wordpress.com/2017/03/cheleton-tecate-original.jpg?w=256&h=256',
-        vibrate: [125,75,125,275,200,275,125,75,125,275,200,600,200,600],
+        vibrate: [125, 75, 125, 275, 200, 275, 125, 75, 125, 275, 200, 600, 200, 600],
         openUrl: '/index.html',
         data: {
             url: '/index.html'
         }
     };
 
-    event.waitUntil( self.registration.showNotification( title, options) );
+    event.waitUntil(self.registration.showNotification(title, options));
 
 });
 
 self.addEventListener('notificationclick', event => {
 
     const notificacion = event.notification;
-    
+
 
     //Clients son los tabs abiertos en el navegador
     const respuesta = clients.matchAll()
-    .then( clientes => {
+        .then(clientes => {
 
-        //Filtrar para los que solo se encuentran visibles
-        let cliente = clientes.find( c => {
-            return c.visibilityState === 'visible';
+            //Filtrar para los que solo se encuentran visibles
+            let cliente = clientes.find(c => {
+                return c.visibilityState === 'visible';
+            });
+
+            //Si encontro al menos uno, redirecciona
+            if (cliente !== undefined) {
+                cliente.navigate(notificacion.data.url);
+                cliente.focus();
+            } else {
+                //No encontro nada, abre nueva ventana con la url
+                clients.openWindow(notificacion.data.url);
+            }
+
+            return notificacion.close();
+
         });
 
-        //Si encontro al menos uno, redirecciona
-        if ( cliente !== undefined ) {
-            cliente.navigate( notificacion.data.url );
-            cliente.focus();
-        } else {
-            //No encontro nada, abre nueva ventana con la url
-            clients.openWindow( notificacion.data.url );
-        }
-
-        return notificacion.close();
-
-    });
-
-    event.waitUntil( respuesta );
+    event.waitUntil(respuesta);
 });

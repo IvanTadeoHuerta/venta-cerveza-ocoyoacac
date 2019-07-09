@@ -7,7 +7,7 @@ function actualizaCacheDinamico(dynamicCache, req, res){
 
         //ABRE LA CACHE Y SE AGREGA A LA CACHE DINAMICA
         return caches.open( dynamicCache ).then( cache =>{
-            console.log('req', req)
+            // console.log('req', req)
             cache.put( req, res.clone() );
             limpiarCache( dynamicCache, 9);
 
@@ -38,4 +38,9 @@ function limpiarCache(cacheName, numeroItems) {
                 }
             })
         });
+}
+
+//MANEJO DE MENSAJES. API CAHCHE NO SOPORTA POST
+function manejoApiMensajes( req ) {
+    return req.clone().method === 'POST';
 }
