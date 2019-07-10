@@ -54,7 +54,7 @@ self.addEventListener('install', event => {
 
 //Proceso para borrar cache cuando se hacen cambios en el SW
 self.addEventListener('activate', event => {
-    console.log('sw activado')
+
     const respuesta = caches.keys().then(keys => {
 
         keys.forEach(key => {
@@ -112,7 +112,7 @@ self.addEventListener('push', event => {
     const notificacion = JSON.parse(event.data.text());
     const title = notificacion.data.titulo;
     const options = {
-        body: notificacion.cuerpo,
+        body: notificacion.data.cuerpo,
         icon: `img/icons/icon72x72.png`,
         image: 'https://cheletoncoacalco.files.wordpress.com/2017/03/cheleton-tecate-original.jpg?w=256&h=256',
         vibrate: [125, 75, 125, 275, 200, 275, 125, 75, 125, 275, 200, 600, 200, 600],

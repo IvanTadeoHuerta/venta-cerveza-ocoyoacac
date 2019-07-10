@@ -13,7 +13,9 @@ if (navigator.serviceWorker) {
   // window.addEventListener('load', () => {
 
   navigator.serviceWorker.register(swLocation).then(registration => {
-    console.log('registrado')
+    //console.log('registrado', registration)
+    // registration.pushManager.getSubscription().then( verificaSuscripcion );
+
     messaging.useServiceWorker(registration);
 
 
@@ -53,6 +55,8 @@ if (navigator.serviceWorker) {
   });
 
   // });
+
+
 
 }
 
