@@ -109,13 +109,13 @@ self.addEventListener('fetch', event => {
 
 self.addEventListener('push', event => {
     
-    const notificacion = JSON.parse(event.data.text());
-    console.log(notificacion, event);
-    const title = notificacion.data.titulo;
+    const datos = JSON.parse(event.data.text());
+    
+    const title = datos.notification.title;
     const options = {
-        body: notificacion.data.cuerpo,
+        body: datos.notification.body,
         icon: `img/icons/icon72x72.png`,
-        image: 'https://cheletoncoacalco.files.wordpress.com/2017/03/cheleton-tecate-original.jpg?w=256&h=256',
+        image: datos.notification.url_imagen,
         vibrate: [125, 75, 125, 275, 200, 275, 125, 75, 125, 275, 200, 600, 200, 600],
         openUrl: '/index.html',
         data: {

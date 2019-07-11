@@ -1,5 +1,7 @@
 var url = window.location.href;
 var swLocation = '/venta-cerveza-ocoyoacac/sw.js';
+var urlHttpService = 'http://localhost:8081';
+var swReg;
 const messaging = firebase.messaging();
 
 if (navigator.serviceWorker) {
@@ -13,16 +15,15 @@ if (navigator.serviceWorker) {
   // window.addEventListener('load', () => {
 
   navigator.serviceWorker.register(swLocation).then(registration => {
-    //console.log('registrado', registration)
-    // registration.pushManager.getSubscription().then( verificaSuscripcion );
+
+    swReg = registration;
 
     messaging.useServiceWorker(registration);
-
 
     // Add the public key generated from the console here.
     messaging.usePublicVapidKey("BP-2K1ewpmeAkqn6RtX9vkb1zFlbNwbOjOT_5dHGBg5UzTZKi-zuw_mXQKjXqse6XRnUv4-RRy-3fmnFHxVa6ng");
 
-
+    swReg.pushManager.getSubscription().then( verificaSuscripcion );
 
     // messaging.requestPermission().then(function () {
     //   console.log('Notification permission granted.');
@@ -66,7 +67,7 @@ if (navigator.serviceWorker) {
 
   // Notificaciones
   function verificaSuscripcion(activadas) {
-
+    
     if (!activadas) {
 
       btnActivaNoti.removeClass('oculto');
@@ -89,7 +90,7 @@ if (navigator.serviceWorker) {
     // Comprobamos si ya nos habían dado permiso
     else if (Notification.permission === "granted") {
       // Si esta correcto lanzamos la notificación
-      subscribe();
+      getToken();
     }
 
     // Si no, tendremos que pedir permiso al usuario
@@ -98,7 +99,7 @@ if (navigator.serviceWorker) {
         // Si el usuario acepta, lanzamos la notificación
         if (permission === "granted") {
 
-          subscribe();
+          getToken();
 
         }
       });
@@ -108,24 +109,63 @@ if (navigator.serviceWorker) {
     // quieres ser respetuoso no hay necesidad molestar más.
   }
 
-  function subscribe() {
-  
+  function getToken() {
+
+    messaging.getToken().then(function (currentToken) {
+      if (currentToken) {
+        suscripcionOfertas(currentToken);
+      } else {
+        console.log('No Instance ID token available. Request permission to generate one.');
+      }
+    }).catch(function (err) { });
+
   }
 
-  function getSuscripcion() {
+  function suscripcionOfertas(tokenDivice) {
 
-  
+    let suscripcion = { "topic_id": 1, "topic": "ofertas", "deviceTokens": [tokenDivice] };
+
+    fetch(`${urlHttpService}/api/Notifications/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(suscripcion)
+    }).then(response => {
+
+      if (response.status == 200) {
+        swReg.pushManager.subscribe({
+          userVisibleOnly: true
+        });
+       
+        verificaSuscripcion( true ) ;
+
+      }
+
+    }).catch(console.log);
+
   }
+
+  function cancelarSuscripcion() {
+
+    swReg.pushManager.getSubscription().then(subs => {
+
+      subs.unsubscribe().then(() => verificaSuscripcion(false));
+
+    });
+
+  }
+
 
 
   btnActivaNoti.on('click', function () {
-
     notifyMe();
-
   });
 
 
+  btnDesNoti.on('click', function () {
 
+    cancelarSuscripcion();
+
+  });
 
 }
 
