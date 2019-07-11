@@ -58,6 +58,10 @@ body {
   position: relative;
 }
 
+.oculto {
+  display: none !important;
+}
+
 ol, ul {
   margin: 0;
   padding: 0;
@@ -2344,6 +2348,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 
   .btn-notificacion{
     background: rgb(33,150,243, 0.75);
+    border: 1px solid transparent;
+    color: white;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-radius: 50px;
+    border-color: white;
+  }
+
+  .btn-notificacion-dis{
+    background: rgb(244,67,54, 0.75);
     border: 1px solid transparent;
     color: white;
     padding-left: 40px;

@@ -22,39 +22,108 @@ if (navigator.serviceWorker) {
     // Add the public key generated from the console here.
     messaging.usePublicVapidKey("BP-2K1ewpmeAkqn6RtX9vkb1zFlbNwbOjOT_5dHGBg5UzTZKi-zuw_mXQKjXqse6XRnUv4-RRy-3fmnFHxVa6ng");
 
-    messaging.requestPermission().then(function () {
-      console.log('Notification permission granted.');
-      // TODO(developer): Retrieve an Instance ID token for use with FCM.
-      // ...
-    }).catch(function (err) {
-      console.log('Unable to get permission to notify.', err);
-    });
 
 
-    // Get Instance ID token. Initially this makes a network call, once retrieved
-    // subsequent calls to getToken will return from cache.
-    messaging.getToken().then(function (currentToken) {
-      console.log(currentToken)
-      if (currentToken) {
-        //   sendTokenToServer(currentToken);
-        //   updateUIForPushEnabled(currentToken);
-      } else {
-        // Show permission request.
-        console.log('No Instance ID token available. Request permission to generate one.');
-        // Show permission UI.
-        //   updateUIForPushPermissionRequired();
-        //   setTokenSentToServer(false);
-      }
-    }).catch(function (err) {
-      console.log('An error occurred while retrieving token. ', err);
-      // showToken('Error retrieving Instance ID token. ', err);
-      // setTokenSentToServer(false);
-    });
+    // messaging.requestPermission().then(function () {
+    //   console.log('Notification permission granted.');
+    //   // TODO(developer): Retrieve an Instance ID token for use with FCM.
+    //   // ...
+    // }).catch(function (err) {
+    //   //console.log('Unable to get permission to notify.', err);
+    // });
+
+
+    // // Get Instance ID token. Initially this makes a network call, once retrieved
+    // // subsequent calls to getToken will return from cache.
+    // messaging.getToken().then(function (currentToken) {
+    //   console.log(currentToken)
+    //   if (currentToken) {
+    //     //   sendTokenToServer(currentToken);
+    //     //   updateUIForPushEnabled(currentToken);
+    //   } else {
+    //     // Show permission request.
+    //     console.log('No Instance ID token available. Request permission to generate one.');
+    //     // Show permission UI.
+    //     //   updateUIForPushPermissionRequired();
+    //     //   setTokenSentToServer(false);
+    //   }
+    // }).catch(function (err) {
+    //   //console.log('An error occurred while retrieving token. ', err);
+    //   // showToken('Error retrieving Instance ID token. ', err);
+    //   // setTokenSentToServer(false);
+    // });
 
 
   });
 
   // });
+
+  // Referencias de jquery
+
+  var btnActivaNoti = $('.btn-activar-noti');
+  var btnDesNoti = $('.btn-desactiva-noti');
+
+
+  // Notificaciones
+  function verificaSuscripcion(activadas) {
+
+    if (!activadas) {
+
+      btnActivaNoti.removeClass('oculto');
+      btnDesNoti.addClass('oculto');
+
+    } else {
+      btnActivaNoti.addClass('oculto');
+      btnDesNoti.removeClass('oculto');
+    }
+
+  }
+
+
+  function notifyMe() {
+    // Comprobamos si el navegador soporta las notificaciones
+    if (!("Notification" in window)) {
+      alert("Este navegador no soporta las notificaciones del sistema");
+    }
+
+    // Comprobamos si ya nos habían dado permiso
+    else if (Notification.permission === "granted") {
+      // Si esta correcto lanzamos la notificación
+      subscribe();
+    }
+
+    // Si no, tendremos que pedir permiso al usuario
+    else if (Notification.permission !== 'denied') {
+      Notification.requestPermission(function (permission) {
+        // Si el usuario acepta, lanzamos la notificación
+        if (permission === "granted") {
+
+          subscribe();
+
+        }
+      });
+    }
+
+    // Finalmente, si el usuario te ha denegado el permiso y 
+    // quieres ser respetuoso no hay necesidad molestar más.
+  }
+
+  function subscribe() {
+  
+  }
+
+  function getSuscripcion() {
+
+  
+  }
+
+
+  btnActivaNoti.on('click', function () {
+
+    notifyMe();
+
+  });
+
 
 
 

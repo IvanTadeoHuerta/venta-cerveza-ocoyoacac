@@ -108,8 +108,9 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', event => {
-
+    
     const notificacion = JSON.parse(event.data.text());
+    console.log(notificacion, event);
     const title = notificacion.data.titulo;
     const options = {
         body: notificacion.data.cuerpo,
