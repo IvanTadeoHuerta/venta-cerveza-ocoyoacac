@@ -4,6 +4,7 @@ var urlHttpService = 'http://localhost:8081';
 var swReg;
 const messaging = firebase.messaging();
 
+
 if (navigator.serviceWorker) {
 
   if (url.includes('localhost')) {
@@ -21,9 +22,11 @@ if (navigator.serviceWorker) {
     messaging.useServiceWorker(registration);
 
     // Add the public key generated from the console here.
-    messaging.usePublicVapidKey("BP-2K1ewpmeAkqn6RtX9vkb1zFlbNwbOjOT_5dHGBg5UzTZKi-zuw_mXQKjXqse6XRnUv4-RRy-3fmnFHxVa6ng");
+    //messaging.usePublicVapidKey("BNGaScfjSCF6Z-rvCqYttWnIVuLBndS68PrnvUWHB-fPogh4_EKh5nQ0292tjIEn-PbvsQZItru9WgwwAp-EVhY");
 
-    swReg.pushManager.getSubscription().then( verificaSuscripcion );
+    swReg.pushManager.getSubscription().then(verificaSuscripcion);
+
+
 
     // messaging.requestPermission().then(function () {
     //   console.log('Notification permission granted.');
@@ -67,7 +70,7 @@ if (navigator.serviceWorker) {
 
   // Notificaciones
   function verificaSuscripcion(activadas) {
-    
+
     if (!activadas) {
 
       btnActivaNoti.removeClass('oculto');
@@ -130,17 +133,18 @@ if (navigator.serviceWorker) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(suscripcion)
     }).then(response => {
-
       if (response.status == 200) {
         swReg.pushManager.subscribe({
-          userVisibleOnly: true
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array("BNGaScfjSCF6Z-rvCqYttWnIVuLBndS68PrnvUWHB-fPogh4_EKh5nQ0292tjIEn-PbvsQZItru9WgwwAp-EVhY")
         });
-       
-        verificaSuscripcion( true ) ;
+
+        verificaSuscripcion(true);
 
       }
-
-    }).catch(console.log);
+      return response.text();
+    }).then(console.log)
+      .catch(console.log);
 
   }
 
@@ -152,6 +156,19 @@ if (navigator.serviceWorker) {
 
     });
 
+  }
+
+  function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
   }
 
 
