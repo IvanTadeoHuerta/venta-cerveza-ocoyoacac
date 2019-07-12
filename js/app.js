@@ -182,6 +182,7 @@ if (navigator.serviceWorker) {
 
 
   btnDesNoti.on('click', function () {
+    btnDesNoti.addClass('oculto');
     cancelarSuscripcion();
 
   });

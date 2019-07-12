@@ -2325,7 +2325,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: none;
   }
 
-  .btn-notificacion{
+  .btn-notificacion, .btn-notificacion-dis{
     display: none;
   }
 
