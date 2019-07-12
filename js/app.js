@@ -114,14 +114,14 @@ if (navigator.serviceWorker) {
   }
 
   function getToken() {
-    btnActivaNoti.addClass( 'oculto' );
+   
     messaging.getToken().then(function (currentToken) {
       if (currentToken) {
         suscripcionOfertas(currentToken);
       } else {
         console.log('No Instance ID token available. Request permission to generate one.');
       }
-    }).catch((err) => { btnActivaNoti.removeClass('oculto') });
+    }).catch((err) => { });
 
   }
 
@@ -145,17 +145,15 @@ if (navigator.serviceWorker) {
       }
       return response.text();
     }).then(console.log)
-      .catch((err) => btnActivaNoti.removeClass('oculto'));
+      .catch((err) => {});
 
   }
 
   function cancelarSuscripcion() {
-    btnDesNoti.addClass('oculto');
     swReg.pushManager.getSubscription().then(subs => {
 
       subs.unsubscribe().then(() => verificaSuscripcion(false))
         .catch(()=>{
-          btnDesNoti.removeClass('oculto');
         });
 
     });
