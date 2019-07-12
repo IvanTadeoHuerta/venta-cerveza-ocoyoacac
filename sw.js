@@ -115,7 +115,7 @@ self.addEventListener('push', event => {
     const options = {
         body: datos.notification.body,
         icon: `img/icons/icon72x72.png`,
-        image: datos.notification.url_imagen,
+        image: datos.data.image,
         vibrate: [125, 75, 125, 275, 200, 275, 125, 75, 125, 275, 200, 600, 200, 600],
         openUrl: '/index.html',
         data: {
