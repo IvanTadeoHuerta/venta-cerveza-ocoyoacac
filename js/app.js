@@ -175,6 +175,7 @@ if (navigator.serviceWorker) {
 
 
   btnActivaNoti.on('click', function () {
+    btnActivaNoti.addClass('oculto');
     notifyMe();
   });
 
