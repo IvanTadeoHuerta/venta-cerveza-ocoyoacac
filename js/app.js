@@ -114,14 +114,14 @@ if (navigator.serviceWorker) {
   }
 
   function getToken() {
-
+    btnActivaNoti.addClass( 'oculto' );
     messaging.getToken().then(function (currentToken) {
       if (currentToken) {
         suscripcionOfertas(currentToken);
       } else {
         console.log('No Instance ID token available. Request permission to generate one.');
       }
-    }).catch(function (err) { });
+    }).catch((err) => { btnActivaNoti.removeClass('oculto') });
 
   }
 
@@ -145,15 +145,18 @@ if (navigator.serviceWorker) {
       }
       return response.text();
     }).then(console.log)
-      .catch(console.log);
+      .catch((err) => btnActivaNoti.removeClass('oculto'));
 
   }
 
   function cancelarSuscripcion() {
-
+    btnDesNoti.addClass('oculto');
     swReg.pushManager.getSubscription().then(subs => {
 
-      subs.unsubscribe().then(() => verificaSuscripcion(false));
+      subs.unsubscribe().then(() => verificaSuscripcion(false))
+        .catch(()=>{
+          btnDesNoti.removeClass('oculto');
+        });
 
     });
 
@@ -180,7 +183,6 @@ if (navigator.serviceWorker) {
 
 
   btnDesNoti.on('click', function () {
-
     cancelarSuscripcion();
 
   });
