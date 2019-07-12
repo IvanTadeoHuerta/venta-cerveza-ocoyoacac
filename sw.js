@@ -117,9 +117,9 @@ self.addEventListener('push', event => {
         icon: `img/icons/icon72x72.png`,
         image: datos.data.image,
         vibrate: [125, 75, 125, 275, 200, 275, 125, 75, 125, 275, 200, 600, 200, 600],
-        openUrl: '/index.html',
+        openUrl: '/venta-cerveza-ocoyoacac/index.html',
         data: {
-            url: '/index.html'
+            url: '/venta-cerveza-ocoyoacac/index.html'
         }
     };
 
