@@ -1,6 +1,7 @@
 var url = window.location.href;
 var swLocation = '/venta-cerveza-ocoyoacac/sw.js';
-var urlHttpService = 'http://localhost:8081';
+// var urlHttpService = 'http://localhost:8081';
+var urlHttpService = 'https://notificaciones-ventas.herokuapp.com';
 var swReg;
 const messaging = firebase.messaging();
 
