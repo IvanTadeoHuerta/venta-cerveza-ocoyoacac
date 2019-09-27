@@ -62,7 +62,7 @@ $(document).ready(function () {
   }
 
   // Smooth scroll for the menu and links with .scrollto classes
-  $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function () {
+  $('.nav-menu a, #mobile-nav a, .scrollto, .btn-ordena-ahora').on('click', function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
       var target = $(this.hash);
       if (target.length) {
@@ -134,10 +134,10 @@ $(document).ready(function () {
     }
   })
 
-  $('.btn-ordena-ahora').on('click', function (event) {
-    event.preventDefault();
-    $('.link-ordenar').trigger("click");
+  // $('.btn-ordena-ahora').on('click', function (event) {
+  //   event.preventDefault();
+  //   $('.link-ordenar').trigger("click");
     
-  });
+  // });
 
 });
