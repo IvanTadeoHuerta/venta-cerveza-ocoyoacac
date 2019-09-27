@@ -134,7 +134,8 @@ $(document).ready(function () {
     }
   })
 
-  $('.btn-ordena-ahora').on('click', function () {
+  $('.btn-ordena-ahora').on('click', function (event) {
+    event.preventDefault();
     $('.link-ordenar').trigger("click");
     
   });
