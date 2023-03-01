@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/IvanTadeoHuerta/venta-cerveza-ocoyoacac#readme",
   "dependencies": {
-    "http-server": "^0.10.0"
+    "http-server": "^14.1.1"
   }
 }
